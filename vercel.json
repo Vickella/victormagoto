@@ -4,6 +4,24 @@
   "installCommand": "",
   "outputDirectory": "dist",
   "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/expertise",
+      "destination": "/"
+    },
+    {
+      "source": "/experience",
+      "destination": "/"
+    },
+    {
+      "source": "/work",
+      "destination": "/"
+    },
+    {
+      "source": "/contact",
+      "destination": "/"
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
