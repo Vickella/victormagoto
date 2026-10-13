@@ -81,3 +81,15 @@
 
 @media(max-width:1200px){.expertise-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:680px){.section{padding-block:3.75rem}.section-heading{margin-bottom:2.25rem}.section-heading h2,.contact h2{font-size:clamp(2.15rem,11vw,3.35rem)}.expertise-grid{grid-template-columns:1fr}.expertise-card{min-height:285px;padding:1.35rem}.feature-shell{min-height:0}.credential-main{min-height:300px}}
+
+/* Purposeful iconography and centred degree presentation. */
+.expertise-card .card-icon{position:relative;width:2.15rem;height:2.15rem;flex-basis:2.15rem;border:1px solid rgba(33,201,176,.25);border-radius:.55rem;background:rgba(94,234,212,.08);box-shadow:0 6px 18px rgba(33,201,176,.08);animation:icon-breathe 3.4s ease-in-out infinite;transition:transform .25s ease,background .25s ease,box-shadow .25s ease}
+.expertise-card:nth-child(2) .card-icon{animation-delay:.35s}.expertise-card:nth-child(3) .card-icon{animation-delay:.7s}.expertise-card:nth-child(4) .card-icon{animation-delay:1.05s}
+.expertise-card .card-icon svg{width:1.25rem;height:1.25rem;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.expertise-card:hover .card-icon{transform:translateY(-2px) scale(1.06);background:rgba(94,234,212,.15);box-shadow:0 9px 24px rgba(33,201,176,.18)}
+.credential-main h3{width:100%;margin:auto 0 2rem;align-self:center;text-align:center}
+.credential-main .degree-badge{align-self:center}
+@keyframes icon-breathe{0%,100%{box-shadow:0 6px 18px rgba(33,201,176,.07)}50%{box-shadow:0 8px 25px rgba(33,201,176,.18)}}
+.feature-actions{display:flex;align-items:center;flex-wrap:wrap;gap:1rem}
+.results-button{min-height:42px;display:inline-flex;align-items:center;gap:.55rem;padding:.7rem 1rem;border:1px solid rgba(94,234,212,.45);border-radius:.3rem;color:var(--cyan);font-size:.72rem;font-weight:800;transition:transform .2s ease,background .2s ease,border-color .2s ease}
+.results-button span{line-height:1}.results-button:hover{transform:translateY(-2px);border-color:var(--cyan);background:rgba(94,234,212,.1)}
