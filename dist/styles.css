@@ -55,3 +55,29 @@
 
 @media(max-width:980px){.contact-layout{grid-template-columns:1fr}.contact-copy{max-width:700px}}
 @media(max-width:680px){.expertise-grid{grid-template-columns:1fr}.expertise-card{min-height:300px}.contact-form{grid-template-columns:1fr}.form-wide{grid-column:1}.form-footer{align-items:stretch;flex-direction:column}.form-footer .button{width:100%}.contact-details a{width:100%;overflow-wrap:anywhere}}
+
+/* Compact, deliberate page rhythm. */
+.section{padding:clamp(4rem,6.5vw,6.25rem) clamp(1.25rem,6vw,7rem)}
+.section-heading{margin-bottom:2.75rem}
+.section-heading h2,.contact h2{font-size:clamp(2.35rem,4vw,4.15rem);line-height:.98;letter-spacing:-.048em}
+.section-heading>p:last-child{font-size:.88rem;line-height:1.7}
+.expertise-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem}
+.expertise-card{min-height:310px;padding:1.5rem;border-radius:.55rem}
+.expertise-card .card-index{right:1.5rem;top:1.35rem;font-size:.72rem}
+.expertise-card .card-heading{gap:.65rem;margin:1.9rem 0 .9rem}
+.expertise-card .card-icon{flex-basis:1.65rem;width:1.65rem;height:1.65rem;font-size:1.35rem}
+.expertise-card h3{font-size:1rem;line-height:1.3}
+.expertise-card p{font-size:.76rem;line-height:1.68}
+.expertise-card .tags{gap:.32rem;padding-top:1rem}
+.expertise-card .tags span{padding:.3rem .44rem;font-size:.53rem}
+.experience .section-heading{margin-bottom:2.25rem}
+.timeline-item{padding:1.65rem 0}
+.feature-shell{min-height:560px}
+.feature-copy h2{font-size:clamp(2.35rem,3.6vw,4rem)}
+.credential-main{min-height:330px;padding:2.25rem}
+.toolkit{padding:2.25rem}.tool-row{padding:1rem 0}
+.contact{padding:clamp(4.5rem,7vw,6.5rem) clamp(1.25rem,6vw,7rem)}
+.contact-copy h2{font-size:clamp(2.7rem,4.8vw,5rem)}
+
+@media(max-width:1200px){.expertise-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.section{padding-block:3.75rem}.section-heading{margin-bottom:2.25rem}.section-heading h2,.contact h2{font-size:clamp(2.15rem,11vw,3.35rem)}.expertise-grid{grid-template-columns:1fr}.expertise-card{min-height:285px;padding:1.35rem}.feature-shell{min-height:0}.credential-main{min-height:300px}}
