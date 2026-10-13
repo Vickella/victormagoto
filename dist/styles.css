@@ -20,3 +20,38 @@
 .card-heading .card-icon{display:inline-grid;flex:0 0 2rem;width:2rem;height:2rem;margin:0;place-items:center;color:var(--c2);font-size:1.7rem;line-height:1}
 .card-heading h3{margin:0;line-height:1.25}
 .feature-list li{align-items:baseline}
+
+/* Balanced two-column expertise grid. */
+.expertise-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;border:0}
+.expertise-card{min-height:315px;padding:2.25rem;border:1px solid var(--line);border-radius:.75rem;background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(232,238,245,.42));overflow:hidden}
+.expertise-card::after{content:'';position:absolute;width:180px;height:180px;right:-110px;top:-110px;border:1px solid rgba(33,201,176,.16);border-radius:50%;box-shadow:0 0 0 35px rgba(33,201,176,.025)}
+.expertise-card:nth-child(2),.expertise-card:nth-child(3){background:linear-gradient(145deg,rgba(235,246,247,.7),rgba(255,255,255,.72))}
+.expertise-card .card-heading{margin:2.4rem 0 1.15rem}
+.expertise-card .card-index{position:absolute;right:2.25rem;top:2rem}
+.expertise-card .tags{padding-top:1.4rem}
+
+/* Contact workspace and direct-to-inbox enquiry form. */
+.contact{padding:clamp(5.5rem,9vw,8.5rem) clamp(1.25rem,6vw,7rem);text-align:left}
+.contact-layout{position:relative;z-index:1;max-width:1400px;margin:0 auto;display:grid;grid-template-columns:minmax(0,.82fr) minmax(520px,1.18fr);gap:clamp(3rem,7vw,7rem);align-items:start}
+.contact-copy h2{margin-bottom:1.8rem;font-size:clamp(3rem,5.5vw,6rem)}
+.contact-copy>p:not(.eyebrow){max-width:620px;margin:0;color:rgba(247,251,255,.63);font-size:.95rem;line-height:1.8}
+.contact-details{display:grid;gap:.8rem;margin-top:2.3rem}
+.contact-details a{display:inline-flex;align-items:center;gap:1rem;width:max-content;color:rgba(247,251,255,.86);font-size:.78rem}
+.contact-details a>span:first-child{display:grid;place-items:center;width:36px;height:36px;border:1px solid rgba(94,234,212,.32);border-radius:50%;color:var(--cyan);font-size:.7rem;font-weight:800;line-height:1}
+.contact-details a>span:last-child{display:grid;gap:.18rem}
+.contact-details small{color:rgba(247,251,255,.4);font-size:.56rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.contact-form{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.15rem;padding:clamp(1.5rem,3vw,2.6rem);border:1px solid rgba(94,234,212,.2);border-radius:.8rem;background:rgba(4,19,35,.62);box-shadow:0 30px 80px rgba(0,0,0,.25);backdrop-filter:blur(14px)}
+.form-field{display:grid;gap:.55rem}.form-wide{grid-column:1/-1}
+.form-field label{color:rgba(247,251,255,.72);font-size:.65rem;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+.form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid rgba(255,255,255,.16);border-radius:.35rem;outline:0;background:rgba(255,255,255,.055);color:var(--white);font:inherit;font-size:.82rem;transition:border-color .2s,background .2s,box-shadow .2s}
+.form-field input,.form-field select{height:52px;padding:0 .95rem}.form-field textarea{min-height:145px;padding:.95rem;resize:vertical;line-height:1.6}
+.form-field select{color:rgba(247,251,255,.75)}.form-field select option{color:var(--ink);background:#fff}
+.form-field input::placeholder,.form-field textarea::placeholder{color:rgba(247,251,255,.3)}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--cyan);background:rgba(255,255,255,.08);box-shadow:0 0 0 3px rgba(94,234,212,.1)}
+.form-footer{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding-top:.35rem}
+.form-footer p{max-width:280px;margin:0;color:rgba(247,251,255,.42);font-size:.65rem;line-height:1.5}
+.form-footer .button{cursor:pointer}.form-honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+.form-success{margin:0;padding:.85rem 1rem;border:1px solid rgba(94,234,212,.32);border-radius:.35rem;background:rgba(94,234,212,.08);color:var(--cyan);font-size:.76rem}
+
+@media(max-width:980px){.contact-layout{grid-template-columns:1fr}.contact-copy{max-width:700px}}
+@media(max-width:680px){.expertise-grid{grid-template-columns:1fr}.expertise-card{min-height:300px}.contact-form{grid-template-columns:1fr}.form-wide{grid-column:1}.form-footer{align-items:stretch;flex-direction:column}.form-footer .button{width:100%}.contact-details a{width:100%;overflow-wrap:anywhere}}
