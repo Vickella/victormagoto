@@ -22,10 +22,8 @@ if(paymentForm){
   const methodField=paymentForm.elements.method;
   const phoneWrap=paymentForm.querySelector('[data-phone-field]');
   const phoneField=paymentForm.elements.phone;
-  const testNote=paymentForm.querySelector('[data-payment-test-note]');
   const togglePhone=()=>{const mobile=methodField.value==='ecocash'||methodField.value==='onemoney';phoneWrap.hidden=!mobile;phoneField.disabled=!mobile;phoneField.required=mobile};
   methodField.addEventListener('change',togglePhone);togglePhone();
-  fetch('/api/paynow/config').then(response=>response.ok?response.json():null).then(config=>{if(config?.mode==='test')testNote.hidden=false}).catch(()=>{});
   paymentForm.addEventListener('submit',async event=>{
     event.preventDefault();
     const button=paymentForm.querySelector('button[type="submit"]');
