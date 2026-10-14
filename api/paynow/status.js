@@ -8,7 +8,7 @@ module.exports = async function handler(req, res) {
     const { integrationKey, sessionSecret } = paymentConfig();
     const payload = verifyPayload(parseJson(req).token, sessionSecret);
     if (!payload || !isPaynowUrl(payload.pollUrl)) return json(res, 400, { error: 'This payment session is invalid or has expired.' });
-    const response = await fetch(payload.pollUrl, { headers: { Accept: 'application/x-www-form-urlencoded' }, signal: AbortSignal.timeout(10_000) });
+    const response = await fetch(payload.pollUrl, { method: 'POST', headers: { Accept: 'application/x-www-form-urlencoded' }, signal: AbortSignal.timeout(10_000) });
     if (!response.ok) throw new Error('Unable to confirm payment status.');
     const entries = parsePaynowMessage(await response.text());
     if (!verifyPaynowMessage(entries, integrationKey)) throw new Error('Paynow returned an invalid security signature.');

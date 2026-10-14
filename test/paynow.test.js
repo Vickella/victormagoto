@@ -50,7 +50,7 @@ test('payment endpoint verifies Paynow and returns only a signed checkout respon
     return { ok:true, text:async()=>new URLSearchParams(responseFields).toString() };
   };
   try {
-    const req = { method:'POST', headers:{origin:'https://victormagoto.vercel.app','x-forwarded-for':'203.0.113.10'}, body:{name:'Test Payer',email:'payer@example.com',amount:'25.00',purpose:'Consultation'} };
+    const req = { method:'POST', headers:{origin:'https://victormagoto.vercel.app','x-forwarded-for':'203.0.113.10'}, body:{name:'Test Payer',email:'payer@example.com',amount:'25.00',purpose:'Consultation',method:'card'} };
     const res = mockResponse();
     await createPayment(req,res);
     assert.equal(res.statusCode,200);
@@ -59,6 +59,53 @@ test('payment endpoint verifies Paynow and returns only a signed checkout respon
     assert.match(body.reference,/^VM-/);
     assert.equal(Boolean(body.statusToken),true);
     assert.equal(res.body.includes(process.env.PAYNOW_INTEGRATION_KEY),false);
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test('surfaces Paynow test-mode errors before checking a missing error hash', async () => {
+  process.env.PAYNOW_INTEGRATION_ID = '1201';
+  process.env.PAYNOW_INTEGRATION_KEY = 'integration-test-key';
+  process.env.SESSION_SECRET = 'session-test-secret-at-least-32-characters';
+  const originalFetch = global.fetch;
+  global.fetch = async () => ({ ok:true, text:async()=>new URLSearchParams([['status','Error'],['error','The email address must match your merchant login in test mode.']]).toString() });
+  try {
+    const req = { method:'POST', headers:{origin:'https://victormagoto.vercel.app','x-forwarded-for':'203.0.113.11'}, body:{name:'Test Payer',email:'other@example.com',amount:'10.00',purpose:'Test',method:'card'} };
+    const res = mockResponse();
+    await createPayment(req,res);
+    assert.equal(res.statusCode,502);
+    assert.match(JSON.parse(res.body).error,/merchant login/i);
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test('starts an EcoCash payment with a phone number and no browser redirect', async () => {
+  process.env.PAYNOW_INTEGRATION_ID = '1201';
+  process.env.PAYNOW_INTEGRATION_KEY = 'integration-test-key';
+  process.env.SESSION_SECRET = 'session-test-secret-at-least-32-characters';
+  const originalFetch = global.fetch;
+  global.fetch = async (url, options) => {
+    assert.equal(url,'https://www.paynow.co.zw/interface/remotetransaction');
+    const sent = [...new URLSearchParams(String(options.body)).entries()];
+    assert.equal(new Map(sent).get('method'),'ecocash');
+    assert.equal(new Map(sent).get('phone'),'0771111111');
+    assert.equal(verifyPaynowMessage(sent,process.env.PAYNOW_INTEGRATION_KEY),true);
+    const responseFields = [['status','Ok'],['instructions','Approve the EcoCash prompt.'],['pollurl','https://www.paynow.co.zw/Interface/CheckPayment/?guid=2']];
+    responseFields.push(['hash',generateHash(responseFields,process.env.PAYNOW_INTEGRATION_KEY)]);
+    return { ok:true, text:async()=>new URLSearchParams(responseFields).toString() };
+  };
+  try {
+    const req = { method:'POST', headers:{origin:'https://victormagoto.vercel.app','x-forwarded-for':'203.0.113.12'}, body:{name:'Test Payer',email:'payer@example.com',amount:'10.00',purpose:'Test',method:'ecocash',phone:'0771111111'} };
+    const res = mockResponse();
+    await createPayment(req,res);
+    assert.equal(res.statusCode,200);
+    const body = JSON.parse(res.body);
+    assert.equal(body.mode,'mobile');
+    assert.equal(body.method,'ecocash');
+    assert.equal(body.redirectUrl,undefined);
+    assert.match(body.instructions,/EcoCash/i);
   } finally {
     global.fetch = originalFetch;
   }

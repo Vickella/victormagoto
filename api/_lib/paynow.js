@@ -1,6 +1,7 @@
 const crypto = require('node:crypto');
 
 const PAYNOW_INIT_URL = 'https://www.paynow.co.zw/interface/initiatetransaction';
+const PAYNOW_MOBILE_URL = 'https://www.paynow.co.zw/interface/remotetransaction';
 
 function generateHash(entries, integrationKey) {
   const joined = entries
@@ -66,4 +67,4 @@ function paymentConfig() {
   return { integrationId, integrationKey, sessionSecret };
 }
 
-module.exports = { PAYNOW_INIT_URL, generateHash, parsePaynowMessage, getValue, verifyPaynowMessage, isPaynowUrl, signPayload, verifyPayload, paymentConfig };
+module.exports = { PAYNOW_INIT_URL, PAYNOW_MOBILE_URL, generateHash, parsePaynowMessage, getValue, verifyPaynowMessage, isPaynowUrl, signPayload, verifyPayload, paymentConfig };
