@@ -1,3 +1,5 @@
 .openai/
 .vercel/
 *.tar.gz
+.env*
+!.env.example

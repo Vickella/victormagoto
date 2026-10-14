@@ -1,0 +1,8 @@
+const loginPanel=document.querySelector('[data-login-panel]');
+const dashboard=document.querySelector('[data-dashboard]');
+const message=document.querySelector('[data-admin-message]');
+const showDashboard=data=>{loginPanel.hidden=true;dashboard.hidden=false;document.querySelector('[data-configured]').textContent=data.configured?'Configured':'Action required';document.querySelector('[data-configured]').classList.toggle('ok',data.configured);document.querySelector('[data-integration]').textContent=data.integration;document.querySelector('[data-mode]').textContent=data.mode;document.querySelector('[data-methods]').replaceChildren(...data.methods.map(method=>{const span=document.createElement('span');span.textContent=method;return span}));document.querySelector('[data-merchant]').href=data.merchantPortal};
+const loadStatus=async()=>{const response=await fetch('/api/admin/status',{headers:{Accept:'application/json'}});if(!response.ok)return;showDashboard(await response.json())};
+document.querySelector('[data-login-form]').addEventListener('submit',async event=>{event.preventDefault();const button=event.currentTarget.querySelector('button');button.disabled=true;message.textContent='Signing in…';try{const response=await fetch('/api/admin/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:new FormData(event.currentTarget).get('password')})});const data=await response.json();if(!response.ok)throw new Error(data.error);message.textContent='';await loadStatus()}catch(error){message.textContent=error.message;button.disabled=false}});
+document.querySelector('[data-logout]').addEventListener('click',async()=>{await fetch('/api/admin/logout',{method:'POST'});location.reload()});
+loadStatus();

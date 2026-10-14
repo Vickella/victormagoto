@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#03101f">
+  <title>Payment Administration | Victor Magoto</title>
+  <link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/admin/admin.css"><script src="/admin/admin.js" defer></script>
+</head>
+<body class="admin-body">
+  <main class="admin-shell">
+    <a class="brand admin-brand" href="/"><span class="brand-mark">VM</span><span>Victor Magoto</span></a>
+    <section class="admin-card" data-login-panel>
+      <p class="eyebrow">SECURE ADMINISTRATION</p><h1>Paynow<br><em>control room.</em></h1>
+      <p class="admin-lead">Sign in to review the server-side Paynow configuration and open the merchant portal.</p>
+      <form class="admin-form" data-login-form><label for="admin-password">Admin password</label><input id="admin-password" name="password" type="password" autocomplete="current-password" required><button class="button button-primary" type="submit">Sign in <span aria-hidden="true">→</span></button><p data-admin-message role="status"></p></form>
+    </section>
+    <section class="admin-dashboard" data-dashboard hidden>
+      <div class="admin-dashboard-head"><div><p class="eyebrow">PAYMENT ADMINISTRATION</p><h1>Integration overview</h1></div><button class="admin-logout" data-logout type="button">Sign out</button></div>
+      <div class="admin-metrics"><article><span>Connection</span><strong data-configured>Checking…</strong></article><article><span>Integration ID</span><strong data-integration>—</strong></article><article><span>Environment</span><strong data-mode>—</strong></article></div>
+      <article class="admin-section"><div><p class="eyebrow">ENABLED AT CHECKOUT</p><h2>Payment methods</h2></div><div class="admin-methods" data-methods></div></article>
+      <article class="admin-section admin-notice"><div><p class="eyebrow">SECURITY MODEL</p><h2>Credentials stay in Vercel</h2></div><p>The Integration Key and admin password are held in encrypted environment variables and are never returned to this browser. Change credentials in Vercel, and manage settlements, refunds and live-mode approval in Paynow.</p></article>
+      <article class="admin-section"><div><p class="eyebrow">TRANSACTION HISTORY</p><h2>Payments and settlements</h2></div><p>Paynow securely maintains your complete transaction history, payment statuses, settlements and refunds. Open the merchant portal to review them without storing duplicate financial records on this website.</p></article>
+      <div class="admin-actions"><a class="button button-primary" href="/pay">Open PayMe checkout <span aria-hidden="true">↗</span></a><a class="button button-ghost" data-merchant target="_blank" rel="noopener noreferrer">Open Paynow merchant portal <span aria-hidden="true">↗</span></a></div>
+    </section>
+  </main>
+</body>
+</html>
